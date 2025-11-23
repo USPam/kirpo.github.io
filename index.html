@@ -317,7 +317,7 @@
                 <button class="nav-btn active" data-page="home" data-key="homeBtn">Главная</button>
                 <button class="nav-btn" data-page="about" data-key="aboutBtn">Обо мне</button>
                 <button class="nav-btn" data-page="services" data-key="servicesBtn">Услуги</button>
-                <button class="nav-btn" data-page="contact" data-key="contactBtn">Связаться со мной</button>
+                <button class="nav-btn" data-page="contact" data-key="contactBtn">Контакты</button>
                 <button class="nav-btn" data-page="support" data-key="supportBtn">Поддержка</button>
             </div>
         </nav>
@@ -404,43 +404,31 @@
             <section id="contactStep2" class="page">
                 <h2 data-key="contactStep2Title">Дополнительная информация</h2>
                 <p data-key="contactStep2Desc">Пожалуйста, заполните дополнительные детали для вашего проекта.</p>
-                <form class="contact-form" action="https://formspree.io/f/xblbbovv" method="POST">
-                    <input type="hidden" name="_next" value="https://kirpo.github.io">
-                    <input type="text" name="_honey" style="display:none;">
-
-                    <input type="hidden" name="Имя" id="submittedName">
-                    <input type="hidden" name="Дата рождения" id="submittedBirthDate">
-                    <input type="hidden" name="Страна" id="submittedCountry">
-                    <input type="hidden" name="Способ связи" id="submittedContactMethod">
-                    <input type="hidden" name="Контакт" id="submittedContactValue">
-
+                <form class="contact-form" id="contactFormStep2">
                     <div class="form-group">
                         <label for="projectDescription" data-key="projectDescriptionLabel">Опишите в 10 предложениях тему сайта...</label>
-                        <textarea name="Описание проекта" id="projectDescription" rows="8" placeholder="Введите описание проекта..." required></textarea>
+                        <textarea id="projectDescription" rows="8" placeholder="Введите описание проекта..." required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="designPreferences" data-key="designPreferencesLabel">В каких цветах и каком стиле вы хотите увидеть свой сайт?</label>
-                        <textarea name="Предпочтения по дизайну" id="designPreferences" rows="6" placeholder="Опишите предпочтения по дизайну..." required></textarea>
+                        <textarea id="designPreferences" rows="6" placeholder="Опишите предпочтения по дизайну..." required></textarea>
                     </div>
-                    <button type="submit" class="submit-btn" data-key="submitBtn">Отправить</button>
+                    <button type="button" id="submitBtn" class="submit-btn" data-key="submitBtn">Отправить</button>
                     <div class="step-indicator" data-key="stepIndicator2">2 из 2</div>
                 </form>
             </section>
 
-            <!-- ✅ НОВАЯ ВКЛАДКА: ПОДДЕРЖКА С ДИНАМИЧЕСКИМ ПОЛЕМ -->
             <section id="support" class="page">
                 <h2 data-key="supportTitle">Техническая поддержка</h2>
                 <p data-key="supportDesc">Опишите вашу проблему, и мы свяжемся с вами в ближайшее время.</p>
-                <form class="support-form" action="https://formspree.io/f/xblbbovv" method="POST">
-                    <input type="hidden" name="_next" value="https://kirpo.github.io">
-
+                <form class="support-form" id="supportForm">
                     <div class="form-group">
                         <label for="supportName" data-key="supportNameLabel">Ваше ФИО</label>
-                        <input type="text" id="supportName" name="ФИО" placeholder="Введите ваше ФИО" required>
+                        <input type="text" id="supportName" placeholder="Введите ваше ФИО" required>
                     </div>
                     <div class="form-group">
                         <label for="supportContactMethod" data-key="supportContactMethodLabel">Способ связи</label>
-                        <select id="supportContactMethod" name="Способ связи" required>
+                        <select id="supportContactMethod" required>
                             <option value="" data-key="selectContactMethod">Выберите способ связи</option>
                             <option value="Telegram" data-key="telegramOption">Telegram</option>
                             <option value="WhatsApp" data-key="whatsappOption">WhatsApp</option>
@@ -451,16 +439,15 @@
                             <option value="Instagram" data-key="instagramOption">Instagram</option>
                         </select>
                     </div>
-                    <!-- ✅ Динамическое поле "Контактные данные" -->
                     <div class="form-group" id="supportContactValueGroup" style="display: none;">
                         <label id="supportContactValueLabel" data-key="supportContactValueLabel">Контактные данные</label>
-                        <input type="text" id="supportContactValue" name="Контактные данные" placeholder="Введите контактные данные" required>
+                        <input type="text" id="supportContactValue" placeholder="Введите контактные данные" required>
                     </div>
                     <div class="form-group">
                         <label for="supportProblem" data-key="supportProblemLabel">Опишите проблему</label>
-                        <textarea id="supportProblem" name="Проблема" rows="6" placeholder="Кратко опишите, что не работает или что вам нужно..." required></textarea>
+                        <textarea id="supportProblem" rows="6" placeholder="Кратко опишите, что не работает или что вам нужно..." required></textarea>
                     </div>
-                    <button type="submit" class="submit-btn" data-key="supportSubmitBtn">Отправить в поддержку</button>
+                    <button type="button" id="supportSubmitBtn" class="submit-btn" data-key="supportSubmitBtn">Отправить в поддержку</button>
                 </form>
             </section>
 
@@ -490,7 +477,7 @@
                 feature1Title: "Быстро", feature1Desc: "Мгновенная навигация между страницами без перезагрузки",
                 feature2Title: "Красиво", feature2Desc: "Современный дизайн с градиентами и анимациями",
                 feature3Title: "Удобно", feature3Desc: "Интуитивно понятная навигация и адаптивный дизайн",
-                aboutTitle: "Немного обо мне", // ✅ исправлено
+                aboutTitle: "Немного обо мне",
                 aboutDesc: "Я — человек, стремящийся создавать лучшие веб-решения для моих клиентов.",
                 aboutFeature1: "Опыт", aboutFeature1Desc: "Более 5 лет опыта в веб-разработке",
                 aboutFeature2: "Качество", aboutFeature2Desc: "Высочайшее качество кода и дизайна",
@@ -509,7 +496,7 @@
                 contactValueLabel: "Контактные данные", nextBtn: "Дальше", stepIndicator: "1 из 2",
                 contactStep2Title: "Дополнительная информация", contactStep2Desc: "Пожалуйста, заполните дополнительные детали для вашего проекта.",
                 projectDescriptionLabel: "Опишите в 10 предложениях тему сайта...", designPreferencesLabel: "В каких цветах и каком стиле вы хотите увидеть свой сайт?",
-                submitBtn: "Отправить", // ✅ исправлено
+                submitBtn: "Отправить",
                 supportTitle: "Техническая поддержка",
                 supportDesc: "Опишите вашу проблему, и мы свяжемся с вами в ближайшее время.",
                 supportNameLabel: "Ваше ФИО",
@@ -679,25 +666,96 @@
                 return;
             }
 
-            document.getElementById('submittedName').value = name;
-            document.getElementById('submittedBirthDate').value = birthDate;
-            document.getElementById('submittedCountry').value = country;
-            document.getElementById('submittedContactMethod').value = contactMethod === 'vk' ? 'ВКонтакте' : 
-                contactMethod === 'telegram' ? 'Telegram' :
-                contactMethod === 'email' ? 'Почта' :
-                contactMethod === 'whatsapp' ? 'WhatsApp' :
-                contactMethod === 'phone' ? 'Номер телефона' :
-                contactMethod === 'instagram' ? 'Instagram' : 'Twitter/X';
-            document.getElementById('submittedContactValue').value = contactValue;
-
             switchPage('contactStep2');
+        });
+
+        // ✅ Отправка формы "Контакты" через fetch
+        document.getElementById('submitBtn').addEventListener('click', () => {
+            const desc = document.getElementById('projectDescription').value.trim();
+            const design = document.getElementById('designPreferences').value.trim();
+            if (!desc || !design) {
+                alert(currentLanguage === 'ru' ? 'Пожалуйста, заполните все поля.' : 'Please fill in all fields.');
+                return;
+            }
+
+            const name = document.getElementById('name').value.trim();
+            const birthDate = document.getElementById('birthDate').value.trim();
+            const countrySelect = document.getElementById('country');
+            const country = countrySelect.options[countrySelect.selectedIndex].text;
+            const contactMethodSelectEl = document.getElementById('contactMethod');
+            const contactMethod = contactMethodSelectEl.options[contactMethodSelectEl.selectedIndex].text;
+            const contactValue = document.getElementById('contactValue').value.trim();
+
+            const data = {
+                name, birthDate, country, contactMethod, contactValue,
+                projectDescription: desc,
+                designPreferences: design
+            };
+
+            fetch('https://formspree.io/f/xblbbovv', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.ok) {
+                    switchPage('success');
+                } else {
+                    throw new Error('Ошибка отправки');
+                }
+            })
+            .catch(err => {
+                alert(currentLanguage === 'ru' 
+                    ? 'Не удалось отправить заявку. Проверьте подключение и повторите попытку.' 
+                    : 'Failed to send. Please try again.');
+            });
+        });
+
+        // ✅ Отправка формы "Поддержка" через fetch
+        document.getElementById('supportSubmitBtn').addEventListener('click', () => {
+            const name = document.getElementById('supportName').value.trim();
+            const contactMethod = document.getElementById('supportContactMethod').value;
+            const contactValue = document.getElementById('supportContactValue').value.trim();
+            const problem = document.getElementById('supportProblem').value.trim();
+
+            if (!name || !contactMethod || !contactValue || !problem) {
+                alert(currentLanguage === 'ru' ? 'Пожалуйста, заполните все поля.' : 'Please fill in all fields.');
+                return;
+            }
+
+            const data = {
+                ФИО: name,
+                'Способ связи': contactMethod,
+                'Контактные данные': contactValue,
+                Проблема: problem
+            };
+
+            fetch('https://formspree.io/f/xblbbovv', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.ok) {
+                    switchPage('success');
+                } else {
+                    throw new Error('Ошибка отправки');
+                }
+            })
+            .catch(err => {
+                alert(currentLanguage === 'ru' 
+                    ? 'Не удалось отправить заявку. Проверьте подключение и повторите попытку.' 
+                    : 'Failed to send. Please try again.');
+            });
         });
 
         document.getElementById('goHomeBtn').addEventListener('click', () => switchPage('home'));
         document.getElementById('sendAnotherBtn').addEventListener('click', () => {
             document.getElementById('contactFormStep1').reset();
             document.getElementById('contactFormStep2').reset();
+            document.getElementById('supportForm').reset();
             contactValueGroup.style.display = 'none';
+            supportContactValueGroup.style.display = 'none';
             switchPage('contact');
         });
 
