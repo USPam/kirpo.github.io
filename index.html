@@ -133,7 +133,7 @@
             margin-bottom: 0;
         }
 
-        .contact-form {
+        .contact-form, .support-form {
             max-width: 600px;
             margin: 0 auto;
         }
@@ -315,9 +315,10 @@
         <nav class="navigation">
             <div class="nav-buttons">
                 <button class="nav-btn active" data-page="home" data-key="homeBtn">Главная</button>
-                <button class="nav-btn" data-page="about" data-key="aboutBtn">О мне</button>
+                <button class="nav-btn" data-page="about" data-key="aboutBtn">Обо мне</button>
                 <button class="nav-btn" data-page="services" data-key="servicesBtn">Услуги</button>
-                <button class="nav-btn" data-page="contact" data-key="contactBtn">Контакты</button>
+                <button class="nav-btn" data-page="contact" data-key="contactBtn">Связаться со мной</button>
+                <button class="nav-btn" data-page="support" data-key="supportBtn">Поддержка</button>
             </div>
         </nav>
 
@@ -333,7 +334,7 @@
             </section>
 
             <section id="about" class="page">
-                <h2 data-key="aboutTitle">Немного о мне</h2>
+                <h2 data-key="aboutTitle">Немного обо мне</h2>
                 <p data-key="aboutDesc">Я — человек, стремящийся создавать лучшие веб-решения для моих клиентов.</p>
                 <div class="features">
                     <div class="feature-card"><h3 data-key="aboutFeature1">Опыт</h3><p data-key="aboutFeature1Desc">Более 5 лет опыта в веб-разработке</p></div>
@@ -358,7 +359,7 @@
                 <form class="contact-form" id="contactFormStep1">
                     <div class="form-group">
                         <label for="name" data-key="fullNameLabel">Ваше ФИО</label>
-                        <input type="text" id="name" placeholder="Введите ваше имя" required>
+                        <input type="text" id="name" placeholder="Введите ваше ФИО" required>
                     </div>
                     <div class="form-group">
                         <label for="birthDate" data-key="birthDateLabel">Дата рождения (ДД.ММ.ГГГГ)</label>
@@ -403,17 +404,63 @@
             <section id="contactStep2" class="page">
                 <h2 data-key="contactStep2Title">Дополнительная информация</h2>
                 <p data-key="contactStep2Desc">Пожалуйста, заполните дополнительные детали для вашего проекта.</p>
-                <form class="contact-form" id="contactFormStep2">
+                <form class="contact-form" action="https://formspree.io/f/xblbbovv" method="POST">
+                    <input type="hidden" name="_next" value="https://kirpo.github.io">
+                    <input type="text" name="_honey" style="display:none;">
+
+                    <input type="hidden" name="Имя" id="submittedName">
+                    <input type="hidden" name="Дата рождения" id="submittedBirthDate">
+                    <input type="hidden" name="Страна" id="submittedCountry">
+                    <input type="hidden" name="Способ связи" id="submittedContactMethod">
+                    <input type="hidden" name="Контакт" id="submittedContactValue">
+
                     <div class="form-group">
                         <label for="projectDescription" data-key="projectDescriptionLabel">Опишите в 10 предложениях тему сайта...</label>
-                        <textarea id="projectDescription" rows="8" placeholder="Введите описание проекта..." required></textarea>
+                        <textarea name="Описание проекта" id="projectDescription" rows="8" placeholder="Введите описание проекта..." required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="designPreferences" data-key="designPreferencesLabel">В каких цветах и каком стиле вы хотите увидеть свой сайт?</label>
-                        <textarea id="designPreferences" rows="6" placeholder="Опишите предпочтения по дизайну..." required></textarea>
+                        <textarea name="Предпочтения по дизайну" id="designPreferences" rows="6" placeholder="Опишите предпочтения по дизайну..." required></textarea>
                     </div>
-                    <button type="button" id="submitBtn" class="submit-btn" data-key="submitBtn">Отправить в Telegram</button>
+                    <button type="submit" class="submit-btn" data-key="submitBtn">Отправить</button>
                     <div class="step-indicator" data-key="stepIndicator2">2 из 2</div>
+                </form>
+            </section>
+
+            <!-- ✅ НОВАЯ ВКЛАДКА: ПОДДЕРЖКА С ДИНАМИЧЕСКИМ ПОЛЕМ -->
+            <section id="support" class="page">
+                <h2 data-key="supportTitle">Техническая поддержка</h2>
+                <p data-key="supportDesc">Опишите вашу проблему, и мы свяжемся с вами в ближайшее время.</p>
+                <form class="support-form" action="https://formspree.io/f/xblbbovv" method="POST">
+                    <input type="hidden" name="_next" value="https://kirpo.github.io">
+
+                    <div class="form-group">
+                        <label for="supportName" data-key="supportNameLabel">Ваше ФИО</label>
+                        <input type="text" id="supportName" name="ФИО" placeholder="Введите ваше ФИО" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="supportContactMethod" data-key="supportContactMethodLabel">Способ связи</label>
+                        <select id="supportContactMethod" name="Способ связи" required>
+                            <option value="" data-key="selectContactMethod">Выберите способ связи</option>
+                            <option value="Telegram" data-key="telegramOption">Telegram</option>
+                            <option value="WhatsApp" data-key="whatsappOption">WhatsApp</option>
+                            <option value="Номер телефона" data-key="phoneOption">Номер телефона</option>
+                            <option value="ВКонтакте" data-key="vkOption">ВКонтакте</option>
+                            <option value="Twitter/X" data-key="twitterOption">Twitter/X</option>
+                            <option value="Почта" data-key="emailOption">Почта</option>
+                            <option value="Instagram" data-key="instagramOption">Instagram</option>
+                        </select>
+                    </div>
+                    <!-- ✅ Динамическое поле "Контактные данные" -->
+                    <div class="form-group" id="supportContactValueGroup" style="display: none;">
+                        <label id="supportContactValueLabel" data-key="supportContactValueLabel">Контактные данные</label>
+                        <input type="text" id="supportContactValue" name="Контактные данные" placeholder="Введите контактные данные" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="supportProblem" data-key="supportProblemLabel">Опишите проблему</label>
+                        <textarea id="supportProblem" name="Проблема" rows="6" placeholder="Кратко опишите, что не работает или что вам нужно..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" data-key="supportSubmitBtn">Отправить в поддержку</button>
                 </form>
             </section>
 
@@ -437,13 +484,14 @@
     <script>
         const translations = {
             ru: {
-                homeBtn: "Главная", aboutBtn: "О мне", servicesBtn: "Услуги", contactBtn: "Контакты",
+                homeBtn: "Главная", aboutBtn: "Обо мне", servicesBtn: "Услуги", contactBtn: "Контакты", supportBtn: "Поддержка",
                 homeTitle: "Добро пожаловать на мой сайт!",
                 homeDesc: "Это современный многостраничный веб-сайт с плавной навигацией и красивым дизайном.",
                 feature1Title: "Быстро", feature1Desc: "Мгновенная навигация между страницами без перезагрузки",
                 feature2Title: "Красиво", feature2Desc: "Современный дизайн с градиентами и анимациями",
                 feature3Title: "Удобно", feature3Desc: "Интуитивно понятная навигация и адаптивный дизайн",
-                aboutTitle: "Немного о мне", aboutDesc: "Я — человек, стремящийся создавать лучшие веб-решения для моих клиентов.",
+                aboutTitle: "Немного обо мне", // ✅ исправлено
+                aboutDesc: "Я — человек, стремящийся создавать лучшие веб-решения для моих клиентов.",
                 aboutFeature1: "Опыт", aboutFeature1Desc: "Более 5 лет опыта в веб-разработке",
                 aboutFeature2: "Качество", aboutFeature2Desc: "Высочайшее качество кода и дизайна",
                 aboutFeature3: "Поддержка", aboutFeature3Desc: "24/7 техническая поддержка моих клиентов",
@@ -461,8 +509,15 @@
                 contactValueLabel: "Контактные данные", nextBtn: "Дальше", stepIndicator: "1 из 2",
                 contactStep2Title: "Дополнительная информация", contactStep2Desc: "Пожалуйста, заполните дополнительные детали для вашего проекта.",
                 projectDescriptionLabel: "Опишите в 10 предложениях тему сайта...", designPreferencesLabel: "В каких цветах и каком стиле вы хотите увидеть свой сайт?",
-                submitBtn: "Отправить в Telegram", stepIndicator2: "2 из 2",
-                successMessage: "Сообщение отправлено!", successDesc: "Спасибо за ваш запрос. Я свяжусь с вами в ближайшее время.",
+                submitBtn: "Отправить", // ✅ исправлено
+                supportTitle: "Техническая поддержка",
+                supportDesc: "Опишите вашу проблему, и мы свяжемся с вами в ближайшее время.",
+                supportNameLabel: "Ваше ФИО",
+                supportContactMethodLabel: "Способ связи",
+                supportProblemLabel: "Опишите проблему",
+                supportSubmitBtn: "Отправить в поддержку",
+                successMessage: "Сообщение отправлено!",
+                successDesc: "Спасибо за ваш запрос. Я свяжусь с вами в ближайшее время.",
                 goHomeBtn: "На главную", sendAnotherBtn: "Отправить еще одно сообщение",
                 copyright: "&copy; 2025 Сайт обо мне. Все права защищены.",
                 languageToggle: "Русский / English",
@@ -470,12 +525,14 @@
                 alertDateInvalid: "Пожалуйста, введите дату в формате ДД.ММ.ГГГГ"
             },
             en: {
-                homeBtn: "Home", aboutBtn: "About Me", servicesBtn: "Services", contactBtn: "Contact",
-                homeTitle: "Welcome to my website!", homeDesc: "This is a modern multi-page website with smooth navigation and beautiful design.",
+                homeBtn: "Home", aboutBtn: "About Me", servicesBtn: "Services", contactBtn: "Contact", supportBtn: "Support",
+                homeTitle: "Welcome to my website!",
+                homeDesc: "This is a modern multi-page website with smooth navigation and beautiful design.",
                 feature1Title: "Fast", feature1Desc: "Instant navigation between pages without reloading",
                 feature2Title: "Beautiful", feature2Desc: "Modern design with gradients and animations",
                 feature3Title: "Convenient", feature3Desc: "Intuitive navigation and responsive design",
-                aboutTitle: "A bit about me", aboutDesc: "I am a person striving to create the best web solutions for my clients.",
+                aboutTitle: "A bit about me",
+                aboutDesc: "I am a person striving to create the best web solutions for my clients.",
                 aboutFeature1: "Experience", aboutFeature1Desc: "Over 5 years of experience in web development",
                 aboutFeature2: "Quality", aboutFeature2Desc: "Highest quality code and design",
                 aboutFeature3: "Support", aboutFeature3Desc: "24/7 technical support for my clients",
@@ -493,8 +550,15 @@
                 contactValueLabel: "Contact details", nextBtn: "Next", stepIndicator: "1 of 2",
                 contactStep2Title: "Additional Information", contactStep2Desc: "Please fill in additional details for your project.",
                 projectDescriptionLabel: "Describe in 10 sentences the website theme...", designPreferencesLabel: "In what colors and style would you like to see your website?",
-                submitBtn: "Send to Telegram", stepIndicator2: "2 of 2",
-                successMessage: "Message sent!", successDesc: "Thank you for your request. I will contact you shortly.",
+                submitBtn: "Send",
+                supportTitle: "Technical Support",
+                supportDesc: "Describe your issue, and we will contact you shortly.",
+                supportNameLabel: "Your Full Name",
+                supportContactMethodLabel: "Contact method",
+                supportProblemLabel: "Describe your issue",
+                supportSubmitBtn: "Submit to support",
+                successMessage: "Message sent!",
+                successDesc: "Thank you for your request. I will contact you shortly.",
                 goHomeBtn: "Go to Home", sendAnotherBtn: "Send another message",
                 copyright: "&copy; 2025 My Personal Website. All rights reserved.",
                 languageToggle: "English / Русский",
@@ -514,14 +578,30 @@
         const contactValueInput = document.getElementById('contactValue');
         const birthDateInput = document.getElementById('birthDate');
 
-        const contactLabels = {
-            ru: { vk: 'Ссылка на профиль ВКонтакте', telegram: 'Ваш username в Telegram', email: 'Ваш email адрес', whatsapp: 'Номер телефона для WhatsApp', phone: 'Ваш номер телефона', instagram: 'Ваш username в Instagram', twitter: 'Ваш username в Twitter/X' },
-            en: { vk: 'VKontakte profile link', telegram: 'Your Telegram username', email: 'Your email address', whatsapp: 'Phone number for WhatsApp', phone: 'Your phone number', instagram: 'Your Instagram username', twitter: 'Your Twitter/X username' }
+        // ✅ Динамические placeholder'ы для контактов
+        const contactPlaceholders = {
+            ru: {
+                vk: 'Ссылка на ваш профиль ВКонтакте (например, https://vk.com/id123)',
+                telegram: 'Ваш username в Telegram (например, @ivan)',
+                email: 'Ваш email',
+                whatsapp: 'Номер телефона для WhatsApp',
+                phone: 'Ваш номер телефона',
+                instagram: 'Ссылка на ваш профиль в Instagram',
+                twitter: 'Ваш username в Twitter/X'
+            }
         };
 
-        const contactPlaceholders = {
-            ru: { vk: 'https://vk.com/ваш_профиль', telegram: '@ваш_username', email: 'ваш@email.com', whatsapp: '+7 (999) 123-45-67', phone: '+7 (999) 123-45-67', instagram: '@ваш_username', twitter: '@ваш_username' },
-            en: { vk: 'https://vk.com/your_profile', telegram: '@your_username', email: 'your@email.com', whatsapp: '+1 (555) 123-4567', phone: '+1 (555) 123-4567', instagram: '@your_username', twitter: '@your_username' }
+        // ✅ Для вкладки "Поддержка"
+        const supportPlaceholders = {
+            ru: {
+                Telegram: 'Ваш username в Telegram (например, @ivan)',
+                WhatsApp: 'Номер телефона',
+                'Номер телефона': 'Ваш номер телефона',
+                'ВКонтакте': 'Ссылка на ваш профиль ВКонтакте',
+                'Twitter/X': 'Ваш username в Twitter/X',
+                Почта: 'Ваш email',
+                Instagram: 'Ссылка на ваш профиль в Instagram'
+            }
         };
 
         function switchPage(pageId) {
@@ -540,16 +620,36 @@
             });
         });
 
+        // ✅ Обновление placeholder'а для контактов (вкладка "Контакты")
         contactMethodSelect.addEventListener('change', function() {
             const method = this.value;
             if (method) {
                 contactValueGroup.style.display = 'block';
-                contactValueLabel.textContent = contactLabels[currentLanguage][method];
-                contactValueInput.placeholder = contactPlaceholders[currentLanguage][method];
+                contactValueLabel.textContent = translations[currentLanguage].contactValueLabel;
+                contactValueInput.placeholder = contactPlaceholders.ru[method] || 'Введите контактные данные';
                 contactValueInput.setAttribute('required', 'required');
             } else {
                 contactValueGroup.style.display = 'none';
                 contactValueInput.removeAttribute('required');
+            }
+        });
+
+        // ✅ Динамическое поле для вкладки "Поддержка"
+        const supportContactMethodSelect = document.getElementById('supportContactMethod');
+        const supportContactValueGroup = document.getElementById('supportContactValueGroup');
+        const supportContactValueLabel = document.getElementById('supportContactValueLabel');
+        const supportContactValueInput = document.getElementById('supportContactValue');
+
+        supportContactMethodSelect.addEventListener('change', function() {
+            const method = this.value;
+            if (method) {
+                supportContactValueGroup.style.display = 'block';
+                supportContactValueLabel.textContent = translations[currentLanguage].supportContactValueLabel;
+                supportContactValueInput.placeholder = supportPlaceholders.ru[method] || 'Введите контактные данные';
+                supportContactValueInput.setAttribute('required', 'required');
+            } else {
+                supportContactValueGroup.style.display = 'none';
+                supportContactValueInput.removeAttribute('required');
             }
         });
 
@@ -566,8 +666,7 @@
             const birthDate = document.getElementById('birthDate').value.trim();
             const countrySelect = document.getElementById('country');
             const country = countrySelect.options[countrySelect.selectedIndex].text;
-            const contactMethodSelectEl = document.getElementById('contactMethod');
-            const contactMethod = contactMethodSelectEl.options[contactMethodSelectEl.selectedIndex].text;
+            const contactMethod = contactMethodSelect.value;
             const contactValue = document.getElementById('contactValue').value.trim();
 
             const dateRegex = /^\d{2}\.\d{2}\.\d{4}$/;
@@ -579,48 +678,19 @@
                 alert(translations[currentLanguage].alertFillContact);
                 return;
             }
+
+            document.getElementById('submittedName').value = name;
+            document.getElementById('submittedBirthDate').value = birthDate;
+            document.getElementById('submittedCountry').value = country;
+            document.getElementById('submittedContactMethod').value = contactMethod === 'vk' ? 'ВКонтакте' : 
+                contactMethod === 'telegram' ? 'Telegram' :
+                contactMethod === 'email' ? 'Почта' :
+                contactMethod === 'whatsapp' ? 'WhatsApp' :
+                contactMethod === 'phone' ? 'Номер телефона' :
+                contactMethod === 'instagram' ? 'Instagram' : 'Twitter/X';
+            document.getElementById('submittedContactValue').value = contactValue;
+
             switchPage('contactStep2');
-        });
-
-        // ✅ ОТПРАВКА В TELEGRAM — ВСЁ ГОТОВО!
-        document.getElementById('submitBtn').addEventListener('click', () => {
-            const desc = document.getElementById('projectDescription').value.trim();
-            const design = document.getElementById('designPreferences').value.trim();
-            if (!desc || !design) {
-                alert(currentLanguage === 'ru' ? 'Пожалуйста, заполните все поля.' : 'Please fill in all fields.');
-                return;
-            }
-
-            const name = document.getElementById('name').value.trim();
-            const birthDate = document.getElementById('birthDate').value.trim();
-            const countrySelect = document.getElementById('country');
-            const country = countrySelect.options[countrySelect.selectedIndex].text;
-            const contactMethodSelect = document.getElementById('contactMethod');
-            const contactMethod = contactMethodSelect.options[contactMethodSelect.selectedIndex].text;
-            const contactValue = document.getElementById('contactValue').value.trim();
-
-            const message = `
-🆕 Новая заявка с сайта!
-
-👤 Имя: ${name}
-📅 Дата рождения: ${birthDate}
-🌍 Страна: ${country}
-📬 Способ связи: ${contactMethod}
-📞 Контакт: ${contactValue}
-
-📄 Описание проекта:
-${desc}
-
-🎨 Предпочтения по дизайну:
-${design}
-            `.trim();
-
-            const BOT_USERNAME = "zayavkiinmy1sait_bot"; // ← ваш бот
-            const encodedMessage = encodeURIComponent(message);
-            const telegramUrl = `https://t.me/${BOT_USERNAME}?text=${encodedMessage}`;
-
-            window.open(telegramUrl, '_blank');
-            switchPage('success');
         });
 
         document.getElementById('goHomeBtn').addEventListener('click', () => switchPage('home'));
@@ -648,12 +718,6 @@ ${design}
                 }
             });
             document.title = lang === 'ru' ? 'Мой первый сайт' : 'My First Website';
-
-            const method = contactMethodSelect.value;
-            if (method && contactValueGroup.style.display !== 'none') {
-                contactValueLabel.textContent = contactLabels[lang][method];
-                contactValueInput.placeholder = contactPlaceholders[lang][method];
-            }
         }
 
         languageToggle.addEventListener('click', () => {
