@@ -310,7 +310,7 @@
 </head>
 <body>
     <button class="language-toggle" id="languageToggle">Русский / English</button>
-
+    
     <div class="container">
         <nav class="navigation">
             <div class="nav-buttons">
@@ -435,9 +435,6 @@
     </div>
 
     <script>
-        // === ВСТАВЬТЕ СЮДА ВАШ WEB APP URL ИЗ GOOGLE APPS SCRIPT ===
-        const WEB_APP_URL = "https://kirpogithubio.vercel.app/api/send";
-
         const translations = {
             ru: {
                 homeBtn: "Главная", aboutBtn: "О мне", servicesBtn: "Услуги", contactBtn: "Контакты",
@@ -569,7 +566,8 @@
             const birthDate = document.getElementById('birthDate').value.trim();
             const countrySelect = document.getElementById('country');
             const country = countrySelect.options[countrySelect.selectedIndex].text;
-            const contactMethod = contactMethodSelect.options[contactMethodSelect.selectedIndex].text;
+            const contactMethodSelectEl = document.getElementById('contactMethod');
+            const contactMethod = contactMethodSelectEl.options[contactMethodSelectEl.selectedIndex].text;
             const contactValue = document.getElementById('contactValue').value.trim();
 
             const dateRegex = /^\d{2}\.\d{2}\.\d{4}$/;
@@ -584,7 +582,7 @@
             switchPage('contactStep2');
         });
 
-        // 📤 ОТПРАВКА В TELEGRAM ЧЕРЕЗ GOOGLE APPS SCRIPT
+        // ✅ Простая отправка без запросов — только переход на success
         document.getElementById('submitBtn').addEventListener('click', () => {
             const desc = document.getElementById('projectDescription').value.trim();
             const design = document.getElementById('designPreferences').value.trim();
@@ -592,38 +590,7 @@
                 alert(currentLanguage === 'ru' ? 'Пожалуйста, заполните все поля.' : 'Please fill in all fields.');
                 return;
             }
-
-            const name = document.getElementById('name').value.trim();
-            const birthDate = document.getElementById('birthDate').value.trim();
-            const countrySelect = document.getElementById('country');
-            const country = countrySelect.options[countrySelect.selectedIndex].text;
-            const contactMethodSelectEl = document.getElementById('contactMethod');
-            const contactMethod = contactMethodSelectEl.options[contactMethodSelectEl.selectedIndex].text;
-            const contactValue = document.getElementById('contactValue').value.trim();
-
-            const data = {
-                name, birthDate, country, contactMethod, contactValue,
-                projectDescription: desc,
-                designPreferences: design
-            };
-
-            fetch(WEB_APP_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (response.ok) {
-                    switchPage('success');
-                } else {
-                    throw new Error('Ошибка сервера');
-                }
-            })
-            .catch(() => {
-                alert(currentLanguage === 'ru'
-                    ? 'Не удалось отправить заявку. Проверьте подключение и повторите попытку.'
-                    : 'Failed to send. Please try again.');
-            });
+            switchPage('success');
         });
 
         document.getElementById('goHomeBtn').addEventListener('click', () => switchPage('home'));
@@ -664,5 +631,4 @@
         });
     </script>
 </body>
-
 </html>
