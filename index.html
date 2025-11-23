@@ -163,7 +163,7 @@
 
         .form-group select {
             appearance: none;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3e%3cpath fill='%2322c55e' d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-image: url("image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3e%3cpath fill='%2322c55e' d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: right 12px center;
             background-size: 16px;
@@ -315,7 +315,7 @@
         <nav class="navigation">
             <div class="nav-buttons">
                 <button class="nav-btn active" data-page="home" data-key="homeBtn">Главная</button>
-                <button class="nav-btn" data-page="about" data-key="aboutBtn">Обо мне</button>
+                <button class="nav-btn" data-page="about" data-key="aboutBtn">О мне</button>
                 <button class="nav-btn" data-page="services" data-key="servicesBtn">Услуги</button>
                 <button class="nav-btn" data-page="contact" data-key="contactBtn">Контакты</button>
             </div>
@@ -333,7 +333,7 @@
             </section>
 
             <section id="about" class="page">
-                <h2 data-key="aboutTitle">Немного обо мне</h2>
+                <h2 data-key="aboutTitle">Немного о мне</h2>
                 <p data-key="aboutDesc">Я — человек, стремящийся создавать лучшие веб-решения для моих клиентов.</p>
                 <div class="features">
                     <div class="feature-card"><h3 data-key="aboutFeature1">Опыт</h3><p data-key="aboutFeature1Desc">Более 5 лет опыта в веб-разработке</p></div>
@@ -412,7 +412,7 @@
                         <label for="designPreferences" data-key="designPreferencesLabel">В каких цветах и каком стиле вы хотите увидеть свой сайт?</label>
                         <textarea id="designPreferences" rows="6" placeholder="Опишите предпочтения по дизайну..." required></textarea>
                     </div>
-                    <button type="button" id="submitBtn" class="submit-btn" data-key="submitBtn">Отправить сообщение</button>
+                    <button type="button" id="submitBtn" class="submit-btn" data-key="submitBtn">Отправить в Telegram</button>
                     <div class="step-indicator" data-key="stepIndicator2">2 из 2</div>
                 </form>
             </section>
@@ -461,7 +461,7 @@
                 contactValueLabel: "Контактные данные", nextBtn: "Дальше", stepIndicator: "1 из 2",
                 contactStep2Title: "Дополнительная информация", contactStep2Desc: "Пожалуйста, заполните дополнительные детали для вашего проекта.",
                 projectDescriptionLabel: "Опишите в 10 предложениях тему сайта...", designPreferencesLabel: "В каких цветах и каком стиле вы хотите увидеть свой сайт?",
-                submitBtn: "Отправить сообщение", stepIndicator2: "2 из 2",
+                submitBtn: "Отправить в Telegram", stepIndicator2: "2 из 2",
                 successMessage: "Сообщение отправлено!", successDesc: "Спасибо за ваш запрос. Я свяжусь с вами в ближайшее время.",
                 goHomeBtn: "На главную", sendAnotherBtn: "Отправить еще одно сообщение",
                 copyright: "&copy; 2025 Сайт обо мне. Все права защищены.",
@@ -493,7 +493,7 @@
                 contactValueLabel: "Contact details", nextBtn: "Next", stepIndicator: "1 of 2",
                 contactStep2Title: "Additional Information", contactStep2Desc: "Please fill in additional details for your project.",
                 projectDescriptionLabel: "Describe in 10 sentences the website theme...", designPreferencesLabel: "In what colors and style would you like to see your website?",
-                submitBtn: "Send message", stepIndicator2: "2 of 2",
+                submitBtn: "Send to Telegram", stepIndicator2: "2 of 2",
                 successMessage: "Message sent!", successDesc: "Thank you for your request. I will contact you shortly.",
                 goHomeBtn: "Go to Home", sendAnotherBtn: "Send another message",
                 copyright: "&copy; 2025 My Personal Website. All rights reserved.",
@@ -582,7 +582,7 @@
             switchPage('contactStep2');
         });
 
-        // ✅ Простая отправка без запросов — только переход на success
+        // ✅ ОТПРАВКА В TELEGRAM — ВСЁ ГОТОВО!
         document.getElementById('submitBtn').addEventListener('click', () => {
             const desc = document.getElementById('projectDescription').value.trim();
             const design = document.getElementById('designPreferences').value.trim();
@@ -590,6 +590,36 @@
                 alert(currentLanguage === 'ru' ? 'Пожалуйста, заполните все поля.' : 'Please fill in all fields.');
                 return;
             }
+
+            const name = document.getElementById('name').value.trim();
+            const birthDate = document.getElementById('birthDate').value.trim();
+            const countrySelect = document.getElementById('country');
+            const country = countrySelect.options[countrySelect.selectedIndex].text;
+            const contactMethodSelect = document.getElementById('contactMethod');
+            const contactMethod = contactMethodSelect.options[contactMethodSelect.selectedIndex].text;
+            const contactValue = document.getElementById('contactValue').value.trim();
+
+            const message = `
+🆕 Новая заявка с сайта!
+
+👤 Имя: ${name}
+📅 Дата рождения: ${birthDate}
+🌍 Страна: ${country}
+📬 Способ связи: ${contactMethod}
+📞 Контакт: ${contactValue}
+
+📄 Описание проекта:
+${desc}
+
+🎨 Предпочтения по дизайну:
+${design}
+            `.trim();
+
+            const BOT_USERNAME = "zayavkiinmy1sait_bot"; // ← ваш бот
+            const encodedMessage = encodeURIComponent(message);
+            const telegramUrl = `https://t.me/${BOT_USERNAME}?text=${encodedMessage}`;
+
+            window.open(telegramUrl, '_blank');
             switchPage('success');
         });
 
@@ -632,4 +662,3 @@
     </script>
 </body>
 </html>
-
